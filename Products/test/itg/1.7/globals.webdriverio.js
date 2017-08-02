@@ -238,6 +238,9 @@ module.exports = {
         pack_availability_date: '//*[@id="form_step3_available_date"]',
         pack_unit_price: '//*[@id="form_step2_unit_price"]',
 
+        //virtual product
+        virtual_product_type : '//*[@id="form"]/div[1]/div[1]/div[1]/div[2]',
+
     },
     shouldExist: function (err, existing) {
         should(err).be.not.defined;
