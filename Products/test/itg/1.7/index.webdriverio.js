@@ -17,16 +17,11 @@ describe('Allscenario', function () {
             .call(done);
     });
 
-    //create a product in BO and check it in FO
+    //Test case n°1 : create and check a standard product in BO
     require('./scenario/BO/add_standard_product.webdriverio.js');
-    // require('./scenario/FO/check_product.webdriverio');
-    //
-    // //create an order in FO and check it in BO
-    // require('./scenario/FO/buy_product.webdriverio');
-    // require('./scenario/BO/check_order.webdriverio');
-    //
-    // //create an account in FO
-    // require('./scenario/FO/create_account.webdriverio');
+
+    //Test case n°2 : create and check a pack product in BO
+    // require('./scenario/BO/add_pack_product.webdriverio');
 
 
 });

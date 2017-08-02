@@ -2,7 +2,6 @@
 var common = require('../common.webdriverio');
 var path = require('path');
 var should = require('should');
-var argv = require('minimist')(process.argv.slice(2));
 
 var today = new Date();
 today.setDate(today.getDate() + 30);
@@ -42,7 +41,7 @@ module.exports =
     metatitle : "metatitle",
     metadesc : "metadesc",
     shortlink : "test_auto",
-    //"picture":"1.png//2.jpg//3.jpg//4.gif//5.jpg//6.jpg",
+    picture:"1.png//2.jpg//3.jpg//4.gif//5.jpg//6.jpg",
     isbn : "1234567890123",
     new_category_name : "NewCategory",
     new_category_parent : "",
@@ -50,7 +49,7 @@ module.exports =
     tax_choosen_shortcut : "1",
     tax_rule : "4",
     redirection_page : "1",
-    //price_priority : "id_shop//id_country//id_group//id_currency",
+    price_priority : "id_shop//id_country//id_group//id_currency",
     price_priority_to_all : "",
 
     features : {
@@ -185,7 +184,7 @@ module.exports =
         group: "3",
         variation: "0",
         start_date: "#now[%Y-%m-%d]-30d#",
-        end_date: "#now[%Y-%m-%d]+30d#",
+        end_date: today,
         quantity: "1",
         price: "20",
         show_price: "1",

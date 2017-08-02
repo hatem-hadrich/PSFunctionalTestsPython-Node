@@ -8,12 +8,7 @@ var path = require('path');
 var toUpload = path.join(__dirname, '../..', 'datas', 'image_test.jpg');
 var newFile = path.join(__dirname, '../..', 'datas', 'bleue.jpg');
 
-function getPicture(name) {
-    return path.join(__dirname, '../..', 'datas', name);
-}
-
-
-describe('Test case n°1 = Add new standard product', function(){
+describe('Test case n°2 = Add new pack product', function(){
     common.initMocha.call(this);
 
     before(function(done){
@@ -23,19 +18,6 @@ describe('Test case n°1 = Add new standard product', function(){
     process.on('uncaughtException', common.take_screenshot);
     process.on('ReferenceError', common.take_screenshot);
     after(common.after);
-
-    function uploadFile(browser, fileSelector, fileName, done) {
-        browser
-            .execute(function () {
-                document.getElementsByClassName("dz-hidden-input").style = "";
-            })
-            .chooseFile(fileSelector, getPicture(fileName))
-            .getAttribute('.dz-preview.dz-image-preview.ui-sortable-handle.dz-complete', "data-id").then(function (text) {
-                global.image_data_id = text;
-            })
-            .pause(2000)
-            .call(done);
-    }
 
     describe('Log in in Back Office', function(done){
         it('should log in successfully in BO', function(done){
@@ -102,38 +84,18 @@ describe('Test case n°1 = Add new standard product', function(){
                 .call(done);
         });
 
-        it('should upload the picture one of product', function (done) {
+        it('should upload the picture of product', function (done) {
             this.client
                 .execute(function () {
                     document.getElementsByClassName("dz-hidden-input").style = "";
                 })
-                .chooseFile(this.selector.picture, getPicture('1.png'))
+                .chooseFile(this.selector.picture, toUpload)
                 .waitForExist(this.selector.picture_cover, 90000)
                 .getAttribute('.dz-preview.dz-image-preview.ui-sortable-handle.dz-complete', "data-id").then(function (text) {
                     global.image_data_id = text;
                 })
                 .pause(2000)
                 .call(done);
-        });
-
-        it('should upload the picture two of product', function (done) {
-            uploadFile(this.client, this.selector.picture, '2.jpg', done);
-        });
-
-        it('should upload the picture three of product', function (done) {
-            uploadFile(this.client, this.selector.picture, '3.jpg', done);
-        });
-
-        it('should upload the picture fore of product', function (done) {
-            uploadFile(this.client, this.selector.picture, '4.gif', done);
-        });
-
-        it('should upload the picture five of product', function (done) {
-            uploadFile(this.client, this.selector.picture, '5.jpg', done);
-        });
-
-        it('should upload the picture six of product', function (done) {
-            uploadFile(this.client, this.selector.picture, '6.jpg', done);
         });
 
         it('should click on create category button', function (done) {
@@ -888,9 +850,8 @@ describe('Test case n°1 = Add new standard product', function(){
 
         it('should select the previous added file ', function(done){
             this.client
-                .scroll(0,1200)
-                .moveToObject(this.selector.options_file_add_button)
-                .pause(2000)
+                .scroll(0, 400)
+                .waitForExist(this.selector.options_file_add_button, 90000)
                 .click(this.selector.options_file_add_button)
                 .pause(2000)
                 .call(done);
@@ -898,17 +859,17 @@ describe('Test case n°1 = Add new standard product', function(){
 
         it('should save and stay in the product page', function (done) {
             this.client
-                .waitForExist(this.selector.save_product_btn, 90000)
+                .waitForExist(this.selector.save_product_btn, 60000)
                 .click(this.selector.save_product_btn)
-                .pause(10000)
+                .pause(6000)
                 .call(done);
         });
 
         it('should go to catalog list of product ', function (done) {
             this.client
-                .waitForExist(this.selector.go_to_catalog, 90000)
+                .waitForExist(this.selector.go_to_catalog, 60000)
                 .click(this.selector.go_to_catalog)
-                .pause(9000)
+                .pause(3000)
                 .call(done);
         });
     });
@@ -916,9 +877,9 @@ describe('Test case n°1 = Add new standard product', function(){
     describe('should check the previous product ', function(done){
         it('should enter the filter name ', function (done) {
             this.client
-                .waitForExist(this.selector.catalogue_filter_by_name, 90000)
+                .waitForExist(this.selector.catalogue_filter_by_name, 60000)
                 .click(this.selector.catalogue_filter_by_name)
-                .pause(4000)
+                .pause(3000)
                 .setValue(this.selector.catalogue_filter_by_name, standard_product.name + product_id)
                 .pause(2000)
                 .click(this.selector.click_outside)
