@@ -28,10 +28,11 @@ module.exports =
     type:"pack of products",
     new_type:"1",
     ref:"new product automate",
+    product_reference:"new product automate",
     ean13:"0123456789987",
     upc:"012345678901",
     resume:"nouveau automate",
-    desc:"nouveau produit cree en automate",
+    desc:"create new product automate",
     tags:"new,auto,standard",
     active:"yes",
     visibility:"search",
@@ -46,7 +47,7 @@ module.exports =
     shortlink:"test_auto",
     picture:"1.png",
     isbn:"1234567890123",
-    new_category_name:"1",
+    new_category_name:"NewPack",
     new_category_parent:"",
     product_category:"",
     tax_choosen_shortcut:"0",
@@ -116,7 +117,7 @@ module.exports =
     document_attach:
         {
             file:"bleue.jpg",
-            name:"",
+            name:"Pack bleue",
             desc:"jpg of bleue"
         },
     personalization : {
