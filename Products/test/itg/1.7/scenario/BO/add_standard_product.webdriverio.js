@@ -861,7 +861,7 @@ describe('Test case n°1 = Add new standard product', function(){
 
         it('should click on the attach a new file button ', function(done){
             this.client
-                .scroll(0,800)
+                .scroll(0,1000)
                 .waitForExist(this.selector.options_add_new_file_button, 90000)
                 .click(this.selector.options_add_new_file_button)
                 .pause(2000)
@@ -870,6 +870,8 @@ describe('Test case n°1 = Add new standard product', function(){
 
         it('should add a file ', function(done){
             this.client
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_select_file, 90000)
                 .chooseFile(this.selector.options_select_file, newFile)
                 .pause(2000)
@@ -896,11 +898,21 @@ describe('Test case n°1 = Add new standard product', function(){
                 .call(done);
         });
 
+        it('should choose the supplier ', function(done){
+            this.client
+                .scroll(0, 1600)
+                .pause(2000)
+                .waitForExist(this.selector.options_choose_supplier, 90000)
+                .click(this.selector.options_choose_supplier)
+                .pause(2000)
+                .call(done);
+        });
+
         it('should save and stay in the product page', function (done) {
             this.client
                 .waitForExist(this.selector.save_product_btn, 90000)
                 .click(this.selector.save_product_btn)
-                .pause(10000)
+                .pause(14000)
                 .call(done);
         });
 
@@ -908,7 +920,7 @@ describe('Test case n°1 = Add new standard product', function(){
             this.client
                 .waitForExist(this.selector.go_to_catalog, 90000)
                 .click(this.selector.go_to_catalog)
-                .pause(9000)
+                .pause(12000)
                 .call(done);
         });
     });

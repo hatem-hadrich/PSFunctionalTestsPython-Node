@@ -665,7 +665,8 @@ describe('Test case n°2 = Add new pack product', function(){
 
         it('should click on the attach a new file button ', function(done){
             this.client
-                .scroll(0,800)
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_add_new_file_button, 90000)
                 .click(this.selector.options_add_new_file_button)
                 .pause(2000)
@@ -674,6 +675,8 @@ describe('Test case n°2 = Add new pack product', function(){
 
         it('should select a file ', function(done){
             this.client
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_select_file, 90000)
                 .chooseFile(this.selector.options_select_file, newFile)
                 .pause(2000)
@@ -682,7 +685,8 @@ describe('Test case n°2 = Add new pack product', function(){
 
         it('should enter the title and description of file ', function(done){
             this.client
-                .scroll(0, 1000)
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_file_name, 90000)
                 .click(this.selector.options_file_name)
                 .pause(2000)
@@ -698,10 +702,48 @@ describe('Test case n°2 = Add new pack product', function(){
 
         it('should select the previous added file ', function(done){
             this.client
-                .scroll(0, 1000)
+                .scroll(0,1200)
                 .waitForExist(this.selector.options_file_add_button, 90000)
                 .click(this.selector.options_file_add_button)
                 .pause(2000)
+                .call(done);
+        });
+
+        it('should choose the supplier ', function(done){
+            this.client
+                .scroll(0,1600)
+                .pause(2000)
+                .waitForExist(this.selector.options_choose_supplier, 90000)
+                .click(this.selector.options_choose_supplier)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enable the default supplier ', function(done){
+            this.client
+                .waitForExist(this.selector.options_default_supplier, 90000)
+                .click(this.selector.options_default_supplier)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the supplier reference ', function(done){
+            this.client
+                .scroll(0,1800)
+                .pause(2000)
+                .waitForExist(this.selector.options_supplier_reference, 90000)
+                .click(this.selector.options_supplier_reference)
+                .pause(2000)
+                .setValue(this.selector.options_supplier_reference, pack_product.supplier_reference)
+                .call(done);
+        });
+
+        it('should enter the product price ', function(done){
+            this.client
+                .waitForExist(this.selector.options_supplier_price, 90000)
+                .click(this.selector.options_supplier_price)
+                .pause(2000)
+                .setValue(this.selector.options_supplier_price, pack_product.product_price)
                 .call(done);
         });
 

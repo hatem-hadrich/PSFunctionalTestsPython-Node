@@ -218,6 +218,8 @@ module.exports = {
         options_file_description: '//*[@id="form_step6_attachment_product_description"]',
         options_file_add_button: '//*[@id="form_step6_attachment_product_add"]',
         options_file_checkbox: '//*[@id="form_step6_attachments_0"]',
+        options_choose_supplier: '//*[@id="form_step6_suppliers_0"]',
+
 
         //pack product
         product_quantities_tab: '//*[@id="tab_step3"]/a',
@@ -237,8 +239,24 @@ module.exports = {
         pack_label_out_stock: '//*[@id="form_step3_available_later_1"]',
         pack_availability_date: '//*[@id="form_step3_available_date"]',
         pack_unit_price: '//*[@id="form_step2_unit_price"]',
+        options_default_supplier: '//*[@id="form_step6_default_supplier_0"]',
+        options_supplier_reference: '//*[@id="form_step6_supplier_combination_1_0_supplier_reference"]',
+        options_supplier_price: '//*[@id="form_step6_supplier_combination_1_0_product_price"]',
+
 
         //virtual product
+        virtual_product_tab : '//*[@id="tab_step3"]/a',
+        virtual_product_associated_file : '//*[@id="form_step3_virtual_product_is_virtual_file_0"]',
+        virtual_product_file : '//*[@id="form_step3_virtual_product_file"]',
+        virtual_product_file_name : '//*[@id="form_step3_virtual_product_name"]',
+        virtual_product_file_nb_download : '//*[@id="form_step3_virtual_product_nb_downloadable"]',
+        virtual_product_file_exp_date : '//*[@id="form_step3_virtual_product_expiration_date"]',
+        virtual_product_file_nb_days : '//*[@id="form_step3_virtual_product_nb_days"]',
+        virtual_product_save_button : '//*[@id="form_step3_virtual_product_save"]',
+        virtual_product_availability_preferences : '//*[@id="form_step3_out_of_stock_0"]',
+        virtual_product_label_in_stock: '//*[@id="form_step3_available_now_1"]',
+        virtual_product_label_out_stock: '//*[@id="form_step3_available_later_1"]',
+        virtual_product_availability_date: '//*[@id="form_step3_available_date"]',
         virtual_product_type : '//*[@id="form"]/div[1]/div[1]/div[1]/div[2]',
 
     },

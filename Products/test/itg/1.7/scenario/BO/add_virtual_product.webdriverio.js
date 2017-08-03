@@ -192,6 +192,14 @@ describe('Test case n°3 = Add new virtual product', function(){
                 .call(done);
         });
 
+        it('should enter the product quantity', function (done) {
+            this.client
+                .waitForExist(this.selector.product_quantity_shortcut, 60000)
+                .click(this.selector.product_quantity_shortcut)
+                .setValue(this.selector.product_quantity_shortcut, virtual_product.quantity)
+                .call(done);
+        });
+
         it('should switch the product online', function (done) {
             this.client
                 .waitForExist(this.selector.product_online, 60000)
@@ -210,8 +218,141 @@ describe('Test case n°3 = Add new virtual product', function(){
     });
 
     describe('Edit pricing of product', function(done){
+        it('should go to the virtual product form ', function(done){
+            this.client
+                .waitForExist(this.selector.virtual_product_tab, 90000)
+                .click(this.selector.virtual_product_tab)
+                .call(done);
+        });
+
+        it('should enter the product quantity ', function (done) {
+            this.client
+                .waitForExist(this.selector.product_quantity_input, 60000)
+                .click(this.selector.product_quantity_input)
+                .setValue(this.selector.product_quantity_input, virtual_product.quantity)
+                .call(done);
+        });
+
+        it('should enter the minimum quantity for sale ', function (done) {
+            this.client
+                .waitForExist(this.selector.minimum_quantity_sale, 60000)
+                .click(this.selector.minimum_quantity_sale)
+                .setValue(this.selector.minimum_quantity_sale, virtual_product.qty_min)
+                .call(done);
+        });
+
+        it('should add an associated file ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_associated_file, 60000)
+                .click(this.selector.virtual_product_associated_file)
+                .call(done);
+        });
+
+        it('should select a file ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_file, 60000)
+                .chooseFile(this.selector.virtual_product_file, getPicture(virtual_product.virtual_file.virtual_file))
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the file name ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_file_name, 60000)
+                .click(this.selector.virtual_product_file_name)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_file_name, virtual_product.virtual_file.virtual_file_name)
+                .call(done);
+        });
+
+        it('should enter the number of download ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_file_nb_download, 60000)
+                .click(this.selector.virtual_product_file_nb_download)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_file_nb_download, virtual_product.virtual_file.virtual_file_nb_download)
+                .call(done);
+        });
+
+        it('should enter the expiration date ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_file_exp_date, 60000)
+                .click(this.selector.virtual_product_file_exp_date)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_file_exp_date, virtual_product.virtual_file.virtual_file_exp_date)
+                .call(done);
+        });
+
+        it('should enter the number of days ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_file_nb_days, 60000)
+                .click(this.selector.virtual_product_file_nb_days)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_file_nb_days, virtual_product.virtual_file.file_nb_days)
+                .call(done);
+        });
+
+        it('should click on save button ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_save_button, 60000)
+                .click(this.selector.virtual_product_save_button)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should select the availability preferences ', function (done) {
+            this.client
+                .scroll(0, 600)
+                .waitForExist(this.selector.virtual_product_availability_preferences, 60000)
+                .click(this.selector.virtual_product_availability_preferences)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the available label in stock ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_label_in_stock, 90000)
+                .click(this.selector.virtual_product_label_in_stock)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_label_in_stock, virtual_product.qty_msg_stock)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the available label out of stock ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_label_out_stock, 90000)
+                .click(this.selector.virtual_product_label_out_stock)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_label_out_stock, virtual_product.qty_msg_unstock)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the availability date ', function (done) {
+            this.client
+                .waitForExist(this.selector.virtual_product_availability_date, 90000)
+                .click(this.selector.virtual_product_availability_date)
+                .pause(2000)
+                .setValue(this.selector.virtual_product_availability_date, virtual_product.qty_date)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should save and stay in the product page', function (done) {
+            this.client
+                .waitForExist(this.selector.save_product_btn, 60000)
+                .click(this.selector.save_product_btn)
+                .pause(3000)
+                .call(done);
+        });
+
+    });
+
+    describe('Edit pricing of product', function(done){
         it('should go to the product pricing form ', function(done){
             this.client
+                .scroll(800, 0)
                 .waitForExist(this.selector.product_pricing_tab, 90000)
                 .click(this.selector.product_pricing_tab)
                 .call(done);
@@ -441,7 +582,8 @@ describe('Test case n°3 = Add new virtual product', function(){
 
         it('should click on the attach a new file button ', function(done){
             this.client
-                .scroll(0,800)
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_add_new_file_button, 90000)
                 .click(this.selector.options_add_new_file_button)
                 .pause(2000)
@@ -450,6 +592,8 @@ describe('Test case n°3 = Add new virtual product', function(){
 
         it('should select a file ', function(done){
             this.client
+                .scroll(0,1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_select_file, 90000)
                 .chooseFile(this.selector.options_select_file, newFile)
                 .pause(2000)
@@ -458,7 +602,8 @@ describe('Test case n°3 = Add new virtual product', function(){
 
         it('should enter the title and description of file ', function(done){
             this.client
-                .scroll(0, 1000)
+                .scroll(0, 1200)
+                .pause(2000)
                 .waitForExist(this.selector.options_file_name, 90000)
                 .click(this.selector.options_file_name)
                 .pause(2000)
@@ -474,10 +619,48 @@ describe('Test case n°3 = Add new virtual product', function(){
 
         it('should select the previous added file ', function(done){
             this.client
-                .scroll(0, 1000)
+                .scroll(0,1200)
                 .waitForExist(this.selector.options_file_add_button, 90000)
                 .click(this.selector.options_file_add_button)
                 .pause(2000)
+                .call(done);
+        });
+
+        it('should choose the supplier ', function(done){
+            this.client
+                .scroll(0, 1600)
+                .pause(2000)
+                .waitForExist(this.selector.options_choose_supplier, 90000)
+                .click(this.selector.options_choose_supplier)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enable the default supplier ', function(done){
+            this.client
+                .waitForExist(this.selector.options_default_supplier, 90000)
+                .click(this.selector.options_default_supplier)
+                .pause(2000)
+                .call(done);
+        });
+
+        it('should enter the supplier reference ', function(done){
+            this.client
+                .scroll(0,1800)
+                .pause(2000)
+                .waitForExist(this.selector.options_supplier_reference, 90000)
+                .click(this.selector.options_supplier_reference)
+                .pause(2000)
+                .setValue(this.selector.options_supplier_reference, virtual_product.supplier_reference)
+                .call(done);
+        });
+
+        it('should enter the product price ', function(done){
+            this.client
+                .waitForExist(this.selector.options_supplier_price, 90000)
+                .click(this.selector.options_supplier_price)
+                .pause(2000)
+                .setValue(this.selector.options_supplier_price, virtual_product.product_price)
                 .call(done);
         });
 
