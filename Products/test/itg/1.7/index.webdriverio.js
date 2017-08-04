@@ -17,17 +17,19 @@ describe('Allscenario', function () {
             .call(done);
     });
 
-    //Test case n°1 : create and check a standard product in BO
+    //Test case n°1 : sort products in BO
+    require('./scenario/BO/sort_product.webdriverio');
+
+    //Test case n°2 : create and check a standard product in BO
     require('./scenario/BO/add_standard_product.webdriverio.js');
 
-    //Test case n°2 : create and check a pack product in BO
+    //Test case n°3 : create and check a pack product in BO
     require('./scenario/BO/add_pack_product.webdriverio');
 
-    //Test case n°3 : create and check a virtual product in BO
+    //Test case n°4 : create and check a virtual product in BO
     require('./scenario/BO/add_virtual_product.webdriverio');
 
-    //Test case n°4 : sort products in BO
-    require('./scenario/BO/sort_product.webdriverio');
+
 
 
 });

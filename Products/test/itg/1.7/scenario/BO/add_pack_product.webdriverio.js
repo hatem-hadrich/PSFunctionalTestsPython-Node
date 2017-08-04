@@ -8,7 +8,7 @@ var path = require('path');
 var toUpload = path.join(__dirname, '../..', 'datas', '1.png');
 var newFile = path.join(__dirname, '../..', 'datas', 'bleue.jpg');
 
-describe('Test case n°2 = Add new pack product', function(){
+describe('Test case n°3 = Add new pack product', function(){
     common.initMocha.call(this);
 
     before(function(done){

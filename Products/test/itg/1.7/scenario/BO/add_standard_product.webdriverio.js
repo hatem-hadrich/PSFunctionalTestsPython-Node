@@ -13,7 +13,7 @@ function getPicture(name) {
 }
 
 
-describe('Test case n°1 = Add new standard product', function(){
+describe('Test case n°2 = Add new standard product', function(){
     common.initMocha.call(this);
 
     before(function(done){
