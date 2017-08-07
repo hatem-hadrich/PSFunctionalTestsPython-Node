@@ -7,13 +7,17 @@ var argv = require('minimist')(process.argv.slice(2));
 global.date_time = new Date().getTime();
 global.URL = argv.URL;
 global.browser = argv.browser;
-global.module_tech_name = argv.MODULE;
+global.module_tech_name = 'contactform';
 global.saucelabs = argv.SAUCELABS;
 global._projectdir = path.join(__dirname, '..', '..');
 global.product_id = new Date().getTime();
 global.new_customer_email = 'pub' + date_time + '@prestashop.com';
 global.name_table= [];
 global.nameTableAfterSort= [];
+global.price_table= [];
+global.priceTableAfterSort= [];
+global.decreasingPrice_table= [];
+global.decreasingPriceTableAfterSort= [];
 
 module.exports = {
     selector: {
@@ -109,9 +113,16 @@ module.exports = {
         customer_delete_mode: '#deleteMode_deleted',
         customer_delete_button: '//div[@class="alert alert-warning"]/input[@type="submit" and @value="Delete"]',
 
+        //sort modules
         modules_menu: '#subtab-AdminParentModulesSf',
         modules_page_loaded: '.module-search-result-wording',
         sort_module: '//*[@id="main-div"]/div[3]/div[2]/div/div[2]/div/div[7]/div/div[2]/div[2]/select',
+        view_list: '//*[@id="module-sort-list"]',
+
+        //search module
+        modules_search: '.pstaggerAddTagInput.module-tags-input',
+        modules_search_button: '.input-group-addon.module-search-icon',
+        nbr_module: '[class="module-sorting-search-wording"]',
 
     },
     shouldExist: function (err, existing) {
