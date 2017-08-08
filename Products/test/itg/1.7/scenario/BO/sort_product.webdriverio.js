@@ -14,6 +14,156 @@ describe('Test case n°1 = Sort products', function(){
     process.on('ReferenceError', common.take_screenshot);
     after(common.after);
 
+    /****************************Sort product by id**********************************/
+    function getProductsId(browser, sort_mode, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getAttribute('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']', 'data-product-id').then(function (productIds) {
+                    product_id_table[i] = productIds;
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+            .waitUntil(function() {
+                global.sortProductsById = getSortProductsId(product_id_table, sort_mode);
+                return browser.getAttribute('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']', 'data-product-id').then(function () {
+                    j++;
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+
+    function getProductsIdAfterSort(browser, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getAttribute('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']', 'data-product-id').then(function (productIds) {
+                    product_id_table_after_sort[i] = productIds;
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+
+            .waitUntil(function() {
+                return browser.getAttribute('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']', 'data-product-id').then(function () {
+                    if(product_id_table_after_sort[j] === sortProductsById[j]) {
+                        j++;
+                    }else{
+                        return done(new Error("something wrong in the sort by id"));
+                    }
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+    
+    function getSortProductsId(table, sort_mode) {
+        if(sort_mode === 'ASC') return table.sort(function (a, b) {  return b - a; }).reverse();
+        if(sort_mode === 'DESC') return table.sort(function (a, b) {  return a - b; }).reverse();
+    }
+
+    /****************************Sort product by name**********************************/
+    function getProductsName(browser, sort_mode, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']/td[3]').then(function (productName) {
+                    product_name_table[i] = productName.toLowerCase();
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+            .waitUntil(function() {
+                global.sortProductsByName = getSortProductsName(product_name_table, sort_mode);
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']/td[3]').then(function () {
+                    j++;
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+
+    function getProductsNameAfterSort(browser, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']/td[3]').then(function (productName) {
+                    product_name_table_after_sort[i] = productName.toLowerCase();
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']/td[3]').then(function () {
+                    if(product_name_table_after_sort[j] === sortProductsByName[j]) {
+                        j++;
+                    }else{
+                        return done(new Error("something wrong in the sort by name"));
+                    }
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+
+    function getSortProductsName(table, sort_mode) {
+        if(sort_mode === 'ASC') return table.sort(function (a, b) {  return a < b; }).reverse();
+        if(sort_mode === 'DESC') return table.sort().reverse();
+    }
+
+    /****************************Sort product by reference**********************************/
+    function getProductsReference(browser, sort_mode, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']/td[4]').then(function (productReference) {
+                    product_reference_table[i] = productReference.toLowerCase();
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+            .waitUntil(function() {
+                global.sortProductsByReference = getSortProductsReference(product_reference_table, sort_mode);
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']/td[4]').then(function () {
+                    j++;
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+
+    function getProductsReferenceAfterSort(browser, done) {
+        var i = 1, j = 1;
+        browser
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+i+']/td[4]').then(function (productReference) {
+                    product_reference_table_after_sort[i] = productReference.toLowerCase();
+                    i++;
+                    return i === productNumber+1;
+                });
+            }, 10000)
+
+            .waitUntil(function() {
+                return browser.getText('//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr['+j+']/td[4]').then(function () {
+                    if(product_reference_table_after_sort[j] === sortProductsByReference[j]) {
+                        j++;
+                    }else{
+                        return done(new Error("something wrong in the sort by reference"));
+                    }
+                    return j === productNumber+1;
+                });
+            }, 10000)
+            .call(done);
+    }
+
+    function getSortProductsReference(table, sort_mode) {
+        if(sort_mode === 'ASC') return table.sort(function (a, b) {  return a < b; }).reverse();
+        if(sort_mode === 'DESC') return table.sort(function (a, b) {  return a > b; }).reverse();
+    }
+
     describe('Log in in Back Office', function(done){
         it('should log in successfully in BO', function(done){
             this.client
@@ -21,14 +171,35 @@ describe('Test case n°1 = Sort products', function(){
                 .waitForExist(this.selector.menu, 90000)
                 .call(done);
         });
+
+        it("should go to the products page", function (done) {
+
+            this.client
+                .waitForExist(this.selector.products, 90000)
+                .click(this.selector.products)
+                .pause(5000)
+
+                .waitForExist(this.selector.sort_category_desc, 90000)
+                .click(this.selector.sort_category_desc)
+                .pause(2000)
+
+                .element("#product_catalog_list > div:nth-child(2) > div > table > tbody > tr").then(function (element) {
+                    global.productNumber = parseInt(element.value.ELEMENT) + 1;
+                    console.log(productNumber);
+                    console.log(element);
+                })
+
+                .getAttribute(this.selector.product_nb_fore, 'value').then(function (id) {
+                    global.productNumber = parseInt(id);
+                })
+                .call(done);
+        });
     });
 
     describe('sort product by id', function (done) {
-        it("should go to the products page", function (done) {
-            this.client
-                .click(this.selector.products)
-                .waitForExist(this.selector.new_product, 120000)
-                .call(done);
+
+        it("should get All product ids before sort", function (done) {
+            getProductsId(this.client, 'DESC', done);
         });
 
         it("should click on sort by desc", function (done) {
@@ -40,50 +211,11 @@ describe('Test case n°1 = Sort products', function(){
         });
 
         it("should check the products sorted by desc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_nb_one, 90000)
-                .getAttribute(this.selector.product_nb_one, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(7);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_two, 90000)
-                .getAttribute(this.selector.product_nb_two, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(6);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_three, 90000)
-                .getAttribute(this.selector.product_nb_three, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(5);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_fore, 90000)
-                .getAttribute(this.selector.product_nb_fore, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(4);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_five, 90000)
-                .getAttribute(this.selector.product_nb_five, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(3);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_six, 90000)
-                .getAttribute(this.selector.product_nb_six, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(2);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_seven, 90000)
-                .getAttribute(this.selector.product_nb_seven, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(1);
-                })
-                .pause(2000)
-                .call(done);
+            getProductsIdAfterSort(this.client, done)
+        });
+
+        it("should get All product ids before sort", function (done) {
+            getProductsId(this.client, 'ASC', done);
         });
 
         it("should click on sort by asc", function (done) {
@@ -95,55 +227,16 @@ describe('Test case n°1 = Sort products', function(){
         });
 
         it("should check the products sorted by asc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_nb_one, 90000)
-                .getAttribute(this.selector.product_nb_one, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(1);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_two, 90000)
-                .getAttribute(this.selector.product_nb_two, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(2);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_three, 90000)
-                .getAttribute(this.selector.product_nb_three, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(3);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_fore, 90000)
-                .getAttribute(this.selector.product_nb_fore, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(4);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_five, 90000)
-                .getAttribute(this.selector.product_nb_five, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(5);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_six, 90000)
-                .getAttribute(this.selector.product_nb_six, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(6);
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_nb_seven, 90000)
-                .getAttribute(this.selector.product_nb_seven, 'value').then(function (id) {
-                    var product_id = parseInt(id);
-                    should(product_id).be.equal(7);
-                })
-                .pause(2000)
-                .call(done);
+            getProductsIdAfterSort(this.client, done)
         });
 
     });
 
     describe('sort product by name', function (done) {
+
+        it("should get All product names before sort", function (done) {
+            getProductsName(this.client, 'DESC', done);
+        });
 
         it("should click on sort by desc", function (done) {
             this.client
@@ -153,44 +246,12 @@ describe('Test case n°1 = Sort products', function(){
                 .call(done)
         });
 
-        it("should check the products sorted by desc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_name_one, 90000)
-                .getText(this.selector.product_name_one).then(function (name) {
-                    should(name).be.equal("Printed Summer Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_two, 90000)
-                .getText(this.selector.product_name_two).then(function (name) {
-                    should(name).be.equal("Printed Summer Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_three, 90000)
-                .getText(this.selector.product_name_three).then(function (name) {
-                    should(name).be.equal("Printed Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_fore, 90000)
-                .getText(this.selector.product_name_fore).then(function (name) {
-                    should(name).be.equal("Printed Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_five, 90000)
-                .getText(this.selector.product_name_five).then(function (name) {
-                    should(name).be.equal("Printed Chiffon Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_six, 90000)
-                .getText(this.selector.product_name_six).then(function (name) {
-                    should(name).be.equal("Faded Short Sleeves T-shirt");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_seven, 90000)
-                .getText(this.selector.product_name_seven).then(function (name) {
-                    should(name).be.equal("Blouse");
-                })
-                .pause(2000)
-                .call(done);
+        it("should check the products name sorted by desc", function (done) {
+            getProductsNameAfterSort(this.client, done)
+        });
+
+        it("should get All product names before sort", function (done) {
+            getProductsName(this.client, 'ASC', done);
         });
 
         it("should click on sort by asc", function (done) {
@@ -201,49 +262,17 @@ describe('Test case n°1 = Sort products', function(){
                 .call(done)
         });
 
-        it("should check the products sorted by asc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_name_one, 90000)
-                .getText(this.selector.product_name_one).then(function (name) {
-                    should(name).be.equal("Blouse");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_two, 90000)
-                .getText(this.selector.product_name_two).then(function (name) {
-                    should(name).be.equal("Faded Short Sleeves T-shirt");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_three, 90000)
-                .getText(this.selector.product_name_three).then(function (name) {
-                    should(name).be.equal("Printed Chiffon Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_fore, 90000)
-                .getText(this.selector.product_name_fore).then(function (name) {
-                    should(name).be.equal("Printed Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_five, 90000)
-                .getText(this.selector.product_name_five).then(function (name) {
-                    should(name).be.equal("Printed Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_six, 90000)
-                .getText(this.selector.product_name_six).then(function (name) {
-                    should(name).be.equal("Printed Summer Dress");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_name_seven, 90000)
-                .getText(this.selector.product_name_seven).then(function (name) {
-                    should(name).be.equal("Printed Summer Dress");
-                })
-                .pause(2000)
-                .call(done);
+        it("should check the product names sorted by asc", function (done) {
+            getProductsNameAfterSort(this.client, done)
         });
 
     });
 
     describe('sort product by reference', function (done) {
+
+        it("should get All product references before sort", function (done) {
+            getProductsReference(this.client, 'DESC', done);
+        });
 
         it("should click on sort by desc", function (done) {
             this.client
@@ -253,44 +282,12 @@ describe('Test case n°1 = Sort products', function(){
                 .call(done)
         });
 
-        it("should check the products sorted by desc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_reference_one, 90000)
-                .getText(this.selector.product_reference_one).then(function (reference) {
-                    should(reference).be.equal("demo_7");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_two, 90000)
-                .getText(this.selector.product_reference_two).then(function (reference) {
-                    should(reference).be.equal("demo_6");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_three, 90000)
-                .getText(this.selector.product_reference_three).then(function (reference) {
-                    should(reference).be.equal("demo_5");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_fore, 90000)
-                .getText(this.selector.product_reference_fore).then(function (reference) {
-                    should(reference).be.equal("demo_4");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_five, 90000)
-                .getText(this.selector.product_reference_five).then(function (reference) {
-                    should(reference).be.equal("demo_3");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_six, 90000)
-                .getText(this.selector.product_reference_six).then(function (reference) {
-                    should(reference).be.equal("demo_2");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_seven, 90000)
-                .getText(this.selector.product_reference_seven).then(function (reference) {
-                    should(reference).be.equal("demo_1");
-                })
-                .pause(2000)
-                .call(done);
+        it("should check the products reference sorted by desc", function (done) {
+            getProductsReferenceAfterSort(this.client, done)
+        });
+
+        it("should get All product references before sort", function (done) {
+            getProductsReference(this.client, 'ASC', done);
         });
 
         it("should click on sort by asc", function (done) {
@@ -301,44 +298,8 @@ describe('Test case n°1 = Sort products', function(){
                 .call(done)
         });
 
-        it("should check the products sorted by asc", function (done) {
-            this.client
-                .waitForExist(this.selector.product_reference_one, 90000)
-                .getText(this.selector.product_reference_one).then(function (reference) {
-                    should(reference).be.equal("demo_1");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_two, 90000)
-                .getText(this.selector.product_reference_two).then(function (reference) {
-                    should(reference).be.equal("demo_2");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_three, 90000)
-                .getText(this.selector.product_reference_three).then(function (reference) {
-                    should(reference).be.equal("demo_3");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_fore, 90000)
-                .getText(this.selector.product_reference_fore).then(function (reference) {
-                    should(reference).be.equal("demo_4");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_five, 90000)
-                .getText(this.selector.product_reference_five).then(function (reference) {
-                    should(reference).be.equal("demo_5");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_six, 90000)
-                .getText(this.selector.product_reference_six).then(function (reference) {
-                    should(reference).be.equal("demo_6");
-                })
-                .pause(2000)
-                .waitForExist(this.selector.product_reference_seven, 90000)
-                .getText(this.selector.product_reference_seven).then(function (reference) {
-                    should(reference).be.equal("demo_7");
-                })
-                .pause(2000)
-                .call(done);
+        it("should check the product references sorted by asc", function (done) {
+            getProductsReferenceAfterSort(this.client, done)
         });
 
     });

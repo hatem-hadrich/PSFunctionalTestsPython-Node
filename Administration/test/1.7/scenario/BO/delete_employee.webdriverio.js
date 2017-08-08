@@ -66,16 +66,6 @@ describe('Test case n°2 = Delete customer ', function(){
                 .call(done);
         });
 
-        // it("should click on < OK > button alert", function (done) {
-        //     this.client
-        //
-        //         .waitForExist(this.selector.customer_delete_mode, 90000)
-        //         .click(this.selector.customer_delete_mode)
-        //         .waitForExist(this.selector.customer_delete_button, 90000)
-        //         .click(this.selector.customer_delete_button)
-        //         .call(done);
-        // });
-
         it("should check delete customer", function (done) {
             this.client
                 .waitForExist(this.selector.customer_green_block_validation, 90000)

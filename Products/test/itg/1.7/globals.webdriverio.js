@@ -12,6 +12,12 @@ global.saucelabs = argv.SAUCELABS;
 global._projectdir = path.join(__dirname, '..', '..');
 global.product_id = new Date().getTime();
 global.new_customer_email = 'pub' + date_time + '@prestashop.com';
+global.product_id_table = [];
+global.product_id_table_after_sort = [];
+global.product_name_table = [];
+global.product_name_table_after_sort = [];
+global.product_reference_table = [];
+global.product_reference_table_after_sort = [];
 
 module.exports = {
     selector: {
@@ -265,31 +271,9 @@ module.exports = {
         sort_name_desc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[3]/span[2]',
         sort_name_asc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[3]/span[1]',
         sort_reference_desc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[4]/span[2]',
-        sort_reference_asc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[5]/span[1]',
-
-        product_nb_one: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[1]/td[1]/div/label/input',
-        product_nb_two: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[2]/td[1]/div/label/input',
-        product_nb_three: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[3]/td[1]/div/label/input',
+        sort_reference_asc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[4]/span[1]',
+        sort_category_desc: '//*[@id="product_catalog_list"]/div[2]/div/table/thead/tr[1]/th[5]/span[2]',
         product_nb_fore: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[4]/td[1]/div/label/input',
-        product_nb_five: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[5]/td[1]/div/label/input',
-        product_nb_six: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[6]/td[1]/div/label/input',
-        product_nb_seven: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[7]/td[1]/div/label/input',
-
-        product_name_one: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[1]/td[3]/a',
-        product_name_two: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[2]/td[3]/a',
-        product_name_three: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[3]/td[3]/a',
-        product_name_fore: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[4]/td[3]/a',
-        product_name_five: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[5]/td[3]/a',
-        product_name_six: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[6]/td[3]/a',
-        product_name_seven: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[7]/td[3]/a',
-
-        product_reference_one: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[1]/td[4]',
-        product_reference_two: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[2]/td[4]',
-        product_reference_three: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[3]/td[4]',
-        product_reference_fore: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[4]/td[4]',
-        product_reference_five: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[5]/td[4]',
-        product_reference_six: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[6]/td[4]',
-        product_reference_seven: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[7]/td[4]',
 
     },
     shouldExist: function (err, existing) {

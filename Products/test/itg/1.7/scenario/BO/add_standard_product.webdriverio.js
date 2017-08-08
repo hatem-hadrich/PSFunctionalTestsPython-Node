@@ -302,6 +302,7 @@ describe('Test case n°2 = Add new standard product', function(){
 
         it('should add feature properties', function (done) {
             this.client
+                .scroll(0, 600)
                 .waitForExist(this.selector.product_add_feature_btn, 90000)
                 .click(this.selector.product_add_feature_btn)
                 .pause(2000)
