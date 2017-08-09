@@ -7,7 +7,7 @@ var argv = require('minimist')(process.argv.slice(2));
 global.date_time = new Date().getTime();
 global.URL = argv.URL;
 global.browser = argv.browser;
-global.module_tech_name = 'contactform';
+global.module_tech_name = 'contact form';
 global.saucelabs = argv.SAUCELABS;
 global._projectdir = path.join(__dirname, '..', '..');
 global.product_id = new Date().getTime();
@@ -18,6 +18,13 @@ global.price_table= [];
 global.priceTableAfterSort= [];
 global.decreasingPrice_table= [];
 global.decreasingPriceTableAfterSort= [];
+global.author_table= [];
+global.description_table= [];
+global.tech_name_table= [];
+global.child_categories_table= [];
+global.categories_table= [];
+global.type_table= [];
+global.check_module= new Array();
 
 module.exports = {
     selector: {

@@ -14,6 +14,93 @@ describe('Test case n°1 = Search module in grid view ', function(){
     process.on('ReferenceError', common.take_screenshot);
     after(common.after);
 
+    /*****************************************************************************************************************************/
+    /***********************************************Get all module after search***************************************************/
+    /*****************************************SEARCH MODULE NAME : contact form***************************************************/
+    /**SEARCH IN : {data-name, data-author, data-description, data-tech-name, data-child-categories, data-categories, data-type}**/
+    /*****************************************************************************************************************************/
+
+    function getAllModulesInformations(browser, done) {
+        var i = 0;
+        browser
+            .waitUntil(function() {
+                i++;check_module[i] = [];
+                return browser
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-name').then(function (name) {
+                                name_table[i] = name.toLowerCase();
+                                if(name_table[i].includes("contact") || name_table[i].includes("form") ) check_module[i][1] = true; else check_module[i][1] = false;
+                                //console.log(check_module[i][1]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-author').then(function (author) {
+                                author_table[i] = author.toLowerCase();
+                                if(author_table[i].includes("contact") || author_table[i].includes("form")) check_module[i][2] = true; else check_module[i][2] = false;
+                                //console.log(check_module[i][2]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-description').then(function (description) {
+                                description_table[i] = description.toLowerCase();
+                                if(description_table[i].includes("contact") || description_table[i].includes("form")) check_module[i][3] = true; else check_module[i][3] = false;
+                                //console.log(check_module[i][3]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-tech-name').then(function (tech_name) {
+                                tech_name_table[i] = tech_name.toLowerCase();
+                                if(tech_name_table[i].includes("contact") || tech_name_table[i].includes("form")) check_module[i][4] = true; else check_module[i][4] = false;
+                                //console.log(check_module[i][4]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-child-categories').then(function (child_categorie) {
+                                child_categories_table[i] = child_categorie.toLowerCase();
+                                if(child_categories_table[i].includes("contact") || child_categories_table[i].includes("form")) check_module[i][5] = true; else check_module[i][5] = false;
+                                //console.log(check_module[i][5]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-categories').then(function (categorie) {
+                                categories_table[i] = categorie.toLowerCase();
+                                if(categories_table[i].includes("contact") || categories_table[i].includes("form")) check_module[i][6] = true; else check_module[i][6] = false;
+                                //console.log(check_module[i][6]);
+                                return i === nbr;
+                            })
+                            .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-type').then(function (type) {
+                                type_table[i] = type.toLowerCase();
+                                if(type_table[i].includes("contact") || type_table[i].includes("form")) check_module[i][7] = true; else check_module[i][7] = false;
+                                //console.log(check_module[i][7]);
+                                //console.log("*************************************************");
+                                return i === nbr;
+                            })
+            }, 10000)
+            .call(done);
+    }
+
+    function checkAllModulesInformations(browser, done) {
+        var i = 0, j = 0;
+        browser
+            .waitUntil(function() {
+                i++;
+                return browser
+                    .getAttribute('//*[@id="modules-list-container-all"]/div['+i+']', 'data-name').then(function () {
+                        if(check_module[i][1] === true||
+                            check_module[i][2]  === true || check_module[i][3]  === true ||
+                            check_module[i][4]  === true || check_module[i][5]  === true ||
+                            check_module[i][6]  === true || check_module[i][7]  === true){
+                            j++;
+                            global.nb_module_after_search = j;
+                        }
+                        return i === nbr;
+                    })
+
+            }, 10000)
+            .waitUntil(function() {
+                if(nb_module_after_search == nbr){
+                    done();
+                }
+                else{
+                    done(new Error("something wrong in the search of modules"));
+                }
+            }, 10000)
+            .call(done);
+    }
     describe('Log in in Back Office', function(done){
         it('should log in successfully in BO', function(done){
             this.client
@@ -41,7 +128,7 @@ describe('Test case n°1 = Search module in grid view ', function(){
                 .setValue(this.selector.modules_search, module_tech_name)
                 .click(this.selector.modules_search_button)
                 .getText(this.selector.nbr_module).then(function (text) {
-                    global.nbr = parseInt(text[0]);
+                    global.nbr = parseInt(text.match(/[0-9]+/g)[0]);
                     if (global.nbr == 0) {
                         done(new Error('The module you are searching for does not exist!'));
                     }
@@ -50,16 +137,12 @@ describe('Test case n°1 = Search module in grid view ', function(){
                 })
         });
 
-        it('should check the name of module', function (done) {
-            this.client
-                .waitForExist('//*[@id="modules-list-container-all"]/div[1]', 90000)
-                .getAttribute('//*[@id="modules-list-container-all"]/div[1]', 'data-name').then(function (data_name) {
-                    should(data_name).be.equal('Contact form');
-                })
-                .getAttribute('//*[@id="modules-list-container-all"]/div[1]', 'data-tech-name').then(function (data_tech_name) {
-                    should(data_tech_name).be.equal(module_tech_name);
-                })
-                .call(done);
+        it('should get all modules informations', function (done) {
+            getAllModulesInformations(this.client, done);
+        });
+
+        it('should check the result search of modules', function (done) {
+            checkAllModulesInformations(this.client,done);
         });
 
 
