@@ -83,7 +83,6 @@ function initCommands(client) {
             .call(cb);
     });
 
-
 }
 module.exports = {
     getClient: function () {

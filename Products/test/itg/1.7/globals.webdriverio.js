@@ -102,7 +102,7 @@ module.exports = {
         customer_filter_by_email: '//input[@name="customerFilter_email"]',
         catalogue_submit_filter: '//button[@name="products_filter_submit"]',
         customer_submit_filter: '//button[@id="submitFilterButtoncustomer"]',
-        catalogue_filter_reset: '//button[@type="reset" and @style="display: inline-block;"]',
+        catalogue_filter_reset: '//button[@type="reset" and @name="products_filter_reset"]',
         catalogue_select_product: '//input[@name="bulk_action_selected_products[]"]',
         customers_select_customer: '//input[@name="customerBox[]"]',
         catalogue_bulk_action_button: '#product_bulk_menu',
